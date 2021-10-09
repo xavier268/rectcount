@@ -11,7 +11,7 @@ Currently estimated O(n^2) x ("mapAccess time") computation time.
 Golang doc says that map access ( *runtime.mapaccess1* ) worst-case time could be as bad as O(n), 
 which would lead to a total of O(n^3) as a worst case.
 
-Benchmarks on random data points are showing slightly worst behaviour than O(n^2), but clearly not as bad as O(n^3)
+Benchmarks on random data points are showing slightly worst behaviour than O(n^2), around O(N^2.11..), far from the worst case of O(n^3).
 
 go test -bench=. -benchmem
 
