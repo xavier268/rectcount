@@ -115,7 +115,7 @@ func BenchmarkCount50(b *testing.B) {
 	}
 	b.ResetTimer()
 	for n := 0; n < b.N; n++ {
-		count(data)
+		Count(data)
 	}
 }
 func BenchmarkCount500(b *testing.B) {
@@ -126,7 +126,7 @@ func BenchmarkCount500(b *testing.B) {
 	}
 	b.ResetTimer()
 	for n := 0; n < b.N; n++ {
-		count(data)
+		Count(data)
 	}
 }
 func BenchmarkCount5000(b *testing.B) {
@@ -137,14 +137,14 @@ func BenchmarkCount5000(b *testing.B) {
 	}
 	b.ResetTimer()
 	for n := 0; n < b.N; n++ {
-		count(data)
+		Count(data)
 	}
 }
 
 // -------------- utility functions ----------------------
 func tc(t *testing.T, want int, input []Point) {
 
-	c := count(input)
+	c := Count(input)
 
 	if c != want {
 		draw(input)
@@ -162,7 +162,7 @@ func draw(points []Point) {
 
 	var plan [41][41]bool // x+20 , y + 20
 	for _, p := range points {
-		plan[p.x+20][p.y+20] = true
+		plan[p.X+20][p.Y+20] = true
 	}
 	for x := 0; x < 41; x++ {
 		for y := 0; y < 41; y++ {

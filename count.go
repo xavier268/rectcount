@@ -2,8 +2,8 @@ package rectcount
 
 // Point
 type Point struct {
-	x int
-	y int
+	X int
+	Y int
 }
 
 // Pair of Points
@@ -13,44 +13,45 @@ type Point struct {
 // 2) diagonal MIDDLE POINT are the same
 // 3) diagonal LENGTH are the same
 
-type Pair struct {
+type pair struct {
 	a Point
 	b Point
 }
 
-// Signature of a pair, that represent a DIAGONAL of the potential rectangle.
+// signature of a pair, that represent a DIAGONAL of the potential rectangle.
 // Two distinct pairs with the same signature form a rectangle.
-type Signature struct {
+type signature struct {
 	mx, my int // twice the middle coordinate (to avoid floating points !)
 	d2     int // square of the diagonal distance
 }
 
-func (p Pair) sign() (s Signature) {
-	s.mx, s.my = p.a.x+p.b.x, p.a.y+p.b.y
-	s.d2 = (p.a.x-p.b.x)*(p.a.x-p.b.x) + (p.a.y-p.b.y)*(p.a.y-p.b.y)
+func (p pair) sign() (s signature) {
+	s.mx, s.my = p.a.X+p.b.X, p.a.Y+p.b.Y
+	s.d2 = (p.a.X-p.b.X)*(p.a.X-p.b.X) + (p.a.Y-p.b.Y)*(p.a.Y-p.b.Y)
 	return s
 }
 
-// Pair maps the signature to the pair of points that share it
-type Pairs map[Signature]([]Pair)
+// Count the number of rectangles that can be formed
+// Compute time is measured at O(n^2.1), worst theoretical case O(n^3)
+func Count(input []Point) int {
 
-// count the number of rectangles that can be formed
-// Compute time is O(n^2)log(n)
-func count(input []Point) int {
+	// Pair maps the signature to the pair of points that share it
+	type pairs map[signature]([]pair)
+
 	// dedup
 	points := dedup(input)
 	answer := 0
-	pairs := make(Pairs, len(points)*len(points))
+	pp := make(pairs, len(points)*len(points))
 	for i := 0; i < len(points); i++ { // O(n)
 		p1 := points[i]
 		for j := i + 1; j < len(points); j++ { // O(n^2)
 			p2 := points[j]
 			if p1 != p2 {
 				// non degenerated pairs only ...
-				p := Pair{p1, p2}
+				p := pair{p1, p2}
 				s := p.sign()
-				answer += len(pairs[s])        // add a rectangle with each eligible prior pair with that signature
-				pairs[s] = append(pairs[s], p) // O(n^2) * n = O(n^3), according to runtime.mapaccess1 worst-case behaviour ...
+				answer += len(pp[s])     // add a rectangle with each eligible prior pair with that signature
+				pp[s] = append(pp[s], p) // O(n^2) * n = O(n^3), according to runtime.mapaccess1 worst-case behaviour, but in practise, much better !
 			}
 		}
 	}
