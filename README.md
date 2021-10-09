@@ -14,6 +14,7 @@ Benchmark and test results confirms O(n^2)Log(n) likelihood ...
 
 ```
 go test -bench=. -benchmem
+
 goos: linux
 goarch: amd64
 pkg: github.com/xavier268/rectcount
