@@ -42,3 +42,4 @@ BenchmarkCount5000-8          50        2675774143 ns/op        2182754588 B/op 
 PASS
 ok      github.com/xavier268/rectcount  137.787s
 ```
+![image](profile001.png)
