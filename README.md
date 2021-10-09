@@ -1,9 +1,14 @@
 # rectcount
-Count all (non-degenerated) rectangles that can be found from a set of interger coordiantes points.
+Count all (non-degenerated) rectangles that can be found from a set of integer coordinates points.
 
 # Problem statement
 
 Given a set of (distinct) points of integer coordinates, find a time efficient algorithm to count the number of rectangles.
+
+For instance, the following points should count as 2 rectangles :
+{0, 1},		{1, 0},		{1, 2},		{2, 1},		{0, 0},		{1, 3},		{-1, 2}
+
+See [test files](count_test.go) for examples.
 
 # Performance 
 
