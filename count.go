@@ -35,13 +35,13 @@ func (p pair) sign() (s signature) {
 // Compute time is measured at O(n^2.1), worst theoretical case O(n^3)
 func Count(input []Point) int {
 
-	// Pair maps the signature to the pair of points that share it
-	type pairs map[signature]([]pair)
-
 	// dedup
 	points := dedup(input)
 	answer := 0
-	pp := make(pairs, len(points)*len(points))
+
+	// pairs maps the signature to the pair of points that share it
+	pairs := make(map[signature]([]pair), len(points)*len(points))
+
 	for i := 0; i < len(points); i++ { // O(n)
 		p1 := points[i]
 		for j := i + 1; j < len(points); j++ { // O(n^2)
@@ -50,8 +50,8 @@ func Count(input []Point) int {
 				// non degenerated pairs only ...
 				p := pair{p1, p2}
 				s := p.sign()
-				answer += len(pp[s])     // add a rectangle with each eligible prior pair with that signature
-				pp[s] = append(pp[s], p) // O(n^2) * n = O(n^3), according to runtime.mapaccess1 worst-case behaviour, but in practise, much better !
+				answer += len(pairs[s])        // add a rectangle with each eligible prior pair with that signature
+				pairs[s] = append(pairs[s], p) // O(n^2) * n = O(n^3), according to runtime.mapaccess1 worst-case behaviour, but in practise, much better !
 			}
 		}
 	}
