@@ -46,13 +46,13 @@ func Count(input []Point) int {
 		p1 := points[i]
 		for j := i + 1; j < len(points); j++ { // O(n^2)
 			p2 := points[j]
-			if p1 != p2 {
-				// non degenerated pairs only ...
-				p := pair{p1, p2}
-				s := p.sign()
-				answer += len(pairs[s])        // add a rectangle with each eligible prior pair with that signature
-				pairs[s] = append(pairs[s], p) // O(n^2) * n = O(n^3), according to runtime.mapaccess1 worst-case behaviour, but in practise, much better !
-			}
+			// if p1 != p2 {
+			// Unnecessay test, we did the dedup of points earlier and i,j loop indexes do not overlap.
+			p := pair{p1, p2}
+			s := p.sign()
+			answer += len(pairs[s])        // add a rectangle with each eligible prior pair with that signature
+			pairs[s] = append(pairs[s], p) // O(n^2) * n = O(n^3), according to runtime.mapaccess1 worst-case behaviour, but in practise, much better !
+			// }
 		}
 	}
 	return answer
