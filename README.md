@@ -13,6 +13,8 @@ which would lead to a total of O(n^3) as a worst case.
 
 Benchmarks on random data points are showing slightly worst behaviour than O(n^2), around O(N^2.11..), far from the worst case of O(n^3).
 
+![image](benchBehaviour.png)
+
 go test -bench=. -benchmem
 
 ```
