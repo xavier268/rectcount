@@ -6,27 +6,6 @@ import (
 	"testing"
 )
 
-func TestCount1(t *testing.T) {
-
-	// points of integer coordinates points
-	// Assume points is deduplicated
-	input := []Point{
-
-		{0, 1},
-		{1, 0},
-		{1, 2},
-		{2, 1},
-	}
-
-	g := count(input) // got
-	w := 1            // want
-
-	if g != w {
-		draw(input)
-		t.Fatalf("unexpected count number, got %d, want %d", g, w)
-	}
-}
-
 func TestCount(t *testing.T) {
 
 	tc(t, 0, []Point{
