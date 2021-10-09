@@ -43,14 +43,14 @@ func count(input []Point) int {
 	pairs := make(Pairs, len(points)*len(points))
 	for i := 0; i < len(points); i++ { // O(n)
 		p1 := points[i]
-		for j := i; j < len(points); j++ { // O(n^2)
+		for j := i + 1; j < len(points); j++ { // O(n^2)
 			p2 := points[j]
 			if p1 != p2 {
 				// non degenerated pairs only ...
 				p := Pair{p1, p2}
 				s := p.sign()
 				answer += len(pairs[s])        // add a rectangle with each eligible prior pair with that signature
-				pairs[s] = append(pairs[s], p) // worst case, O(n^2)log(n)
+				pairs[s] = append(pairs[s], p) // O(n^2) * n = O(n^3), according to runtime.mapaccess1 worst-case behaviour ...
 			}
 		}
 	}
