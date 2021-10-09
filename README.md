@@ -10,7 +10,7 @@ Given a set of (distinct) points of integer coordinates, find a time efficient a
 Currently estimated O(n^2)log(n) computation time.
 The log(n) comes from the need to use a hash map structure.
 
-Benchmark and test results confirms O(n^2)Log(n) likelihood ...
+Benchmark and test results confirms O(n^2)Log(n) likelyhood ...
 
 ```
 go test -bench=. -benchmem
